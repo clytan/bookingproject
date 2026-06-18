@@ -1,6 +1,4 @@
-# Secrets — never commit
-api/config/db.local.php
-api/config/jwt.local.php
+# User explicitly chose to commit DB/JWT local config files to a public repo.
 .env
 .env.local
 .env.*.local
