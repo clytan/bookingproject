@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, Suspense } from 'react';
-import { useParams, useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { FaStar, FaMapMarkerAlt, FaUsers, FaBed, FaCheckCircle } from 'react-icons/fa';
 import Navbar from '../../../components/Navbar.jsx';
 import Footer from '../../../components/Footer.jsx';
@@ -10,9 +10,9 @@ import { useAuth } from '../../../lib/AuthContext';
 import '../../../styles/HotelDetail.css';
 
 function HotelDetailInner() {
-  const { id }  = useParams();
   const router  = useRouter();
   const params  = useSearchParams();
+  const id      = params.get('id');
   const { user, loading: authLoading } = useAuth();
 
   const today    = new Date().toISOString().slice(0, 10);
@@ -52,7 +52,7 @@ function HotelDetailInner() {
   const handleBook = async (room) => {
     if (authLoading) return;
     if (!user) {
-      const back = `/hotels/${id}?checkin=${checkin}&checkout=${checkout}&guests=${guests}`;
+      const back = `/hotels/detail?id=${id}&checkin=${checkin}&checkout=${checkout}&guests=${guests}`;
       router.push(`/login?redirect=${encodeURIComponent(back)}`);
       return;
     }

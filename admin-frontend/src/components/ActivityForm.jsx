@@ -61,7 +61,7 @@ export default function ActivityForm({ initial = EMPTY, title = 'New Activity' }
         user_rating:  Number(f.user_rating),
       });
       const id = res.id || f.id;
-      router.push(`/activities/${id}/edit?saved=1`);
+      router.push(`/activities/edit?id=${id}&saved=1`);
     } catch (err) { setError(err.message); }
     finally { setSaving(false); }
   };

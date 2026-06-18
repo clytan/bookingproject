@@ -1,17 +1,17 @@
 'use client';
 
 import { useEffect, useState, Suspense } from 'react';
-import { useParams, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { FaPlus, FaPencilAlt, FaTrash, FaClock, FaUsers, FaCheck } from 'react-icons/fa';
-import AuthGuard from '../../../../components/AuthGuard.jsx';
-import Sidebar from '../../../../components/Sidebar.jsx';
-import Header from '../../../../components/Header.jsx';
-import ActivityForm from '../../../../components/ActivityForm.jsx';
-import { api } from '../../../../lib/api';
-import '../../../../styles/Dashboard.css';
-import '../../../../styles/AdminList.css';
-import '../../../../styles/HotelForm.css';
-import '../../../../styles/RoomManager.css';
+import AuthGuard from '../../../components/AuthGuard.jsx';
+import Sidebar from '../../../components/Sidebar.jsx';
+import Header from '../../../components/Header.jsx';
+import ActivityForm from '../../../components/ActivityForm.jsx';
+import { api } from '../../../lib/api';
+import '../../../styles/Dashboard.css';
+import '../../../styles/AdminList.css';
+import '../../../styles/HotelForm.css';
+import '../../../styles/RoomManager.css';
 
 const EMPTY_SLOT = {
   id: 0, slot_label: '', description: '', departure_time: '09:00',
@@ -20,8 +20,8 @@ const EMPTY_SLOT = {
 };
 
 function EditActivityInner() {
-  const { id }  = useParams();
   const params  = useSearchParams();
+  const id      = params.get('id');
   const saved   = params.get('saved') === '1';
 
   const [activity, setActivity] = useState(null);

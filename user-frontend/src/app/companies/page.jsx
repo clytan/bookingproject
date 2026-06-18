@@ -147,7 +147,7 @@ function CompaniesInner() {
               if (city)          linkQuery.set('city', city);
               const qs = linkQuery.toString();
               return (
-                <Link key={o.id} href={`/operators/${o.id}${qs ? `?${qs}` : ''}`} className="hotel-card">
+                <Link key={o.id} href={`/operators/detail?id=${o.id}${qs ? `&${qs}` : ''}`} className="hotel-card">
                   <div className="hotel-image" style={{ backgroundImage: `url(${o.cover_image || ''})` }}>
                     <div className="star-badge"><FaBuilding /></div>
                   </div>

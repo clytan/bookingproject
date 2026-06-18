@@ -79,7 +79,7 @@ function Inner() {
               </thead>
               <tbody>
                 {operators.map((o) => (
-                  <tr key={o.id} onClick={() => router.push(`/operators/${o.id}/edit`)} style={{ cursor: 'pointer' }}>
+                  <tr key={o.id} onClick={() => router.push(`/operators/edit?id=${o.id}`)} style={{ cursor: 'pointer' }}>
                     <td className="mono">{o.username}</td>
                     <td className="strong">{o.full_name}</td>
                     <td className="muted">{o.email}</td>
@@ -91,7 +91,7 @@ function Inner() {
                     <td className="muted small">{o.created_at?.slice(0,10)}</td>
                     <td onClick={(e) => e.stopPropagation()}>
                       <div style={{ display: 'flex', gap: 6 }}>
-                        <Link href={`/operators/${o.id}/edit`} className="icon-action" aria-label="Edit"><FaPencilAlt /></Link>
+                        <Link href={`/operators/edit?id=${o.id}`} className="icon-action" aria-label="Edit"><FaPencilAlt /></Link>
                         <button className="icon-action danger" onClick={() => remove(o)} aria-label="Delete"><FaTrash /></button>
                       </div>
                     </td>

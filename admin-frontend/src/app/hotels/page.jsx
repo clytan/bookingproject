@@ -78,7 +78,7 @@ function Inner() {
               </thead>
               <tbody>
                 {hotels.map((h) => (
-                  <tr key={h.id} onClick={() => router.push(`/hotels/${h.id}/edit`)} style={{ cursor: 'pointer' }}>
+                  <tr key={h.id} onClick={() => router.push(`/hotels/edit?id=${h.id}`)} style={{ cursor: 'pointer' }}>
                     <td><div className="thumb" style={{ backgroundImage: `url(${h.image_url})` }} /></td>
                     <td className="strong">{h.name}</td>
                     <td>{h.city}</td>
@@ -90,7 +90,7 @@ function Inner() {
                     <td><span className={`status-pill ${h.is_active ? 'confirmed' : 'cancelled'}`}>{h.is_active ? 'Active' : 'Disabled'}</span></td>
                     <td onClick={(e) => e.stopPropagation()}>
                       <div style={{ display: 'flex', gap: 6 }}>
-                        <Link href={`/hotels/${h.id}/edit`} className="icon-action" aria-label="Edit"><FaPencilAlt /></Link>
+                        <Link href={`/hotels/edit?id=${h.id}`} className="icon-action" aria-label="Edit"><FaPencilAlt /></Link>
                         <button className="icon-action danger" onClick={() => remove(h)} aria-label="Delete"><FaTrash /></button>
                       </div>
                     </td>

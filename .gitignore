@@ -18,3 +18,5 @@ out/
 Thumbs.db
 .vscode/
 .idea/
+
+# Frontend build outputs

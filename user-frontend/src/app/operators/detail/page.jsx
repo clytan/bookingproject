@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState, Suspense } from 'react';
-import { useParams, useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import {
   FaStar, FaMapMarkerAlt, FaClock, FaBuilding, FaCheckCircle,
   FaPlus, FaMinus, FaTrash, FaUsers, FaShoppingBag, FaCalendarAlt, FaChevronUp, FaChevronDown,
@@ -20,9 +20,9 @@ const CAT_LABEL = {
 };
 
 function OperatorInner() {
-  const { id }     = useParams();
   const router     = useRouter();
   const params     = useSearchParams();
+  const id         = params.get('id');
   const { user, loading: authLoading } = useAuth();
   const catFilter  = params.get('category') || '';
   const cityFilter = params.get('city')     || '';
@@ -35,13 +35,10 @@ function OperatorInner() {
 
   const [date, setDate]       = useState(today);
   const [persons, setPersons] = useState(2);
-  const [cart, setCart]       = useState({});      // activity_id -> slot_id
+  const [cart, setCart]       = useState({});
 
-  // { activity_id: { date: { slot_id: { available, fully_booked } } } }
   const [availMap, setAvailMap]     = useState({});
-  // activity_id -> [slot, ...]
   const [slotsCache, setSlotsCache] = useState({});
-  // Track which activity cards are expanded
   const [expanded, setExpanded] = useState({});
   const [mobileCartOpen, setMobileCartOpen] = useState(false);
 
@@ -55,7 +52,6 @@ function OperatorInner() {
     api.operatorGet(id, { category: catFilter, city: cityFilter })
       .then((res) => {
         setData(res);
-        // Auto-expand the first highlighted activity if a category filter is set
         if (catFilter && res.activities) {
           const firstHit = res.activities.find((a) => a.highlight);
           if (firstHit) setExpanded({ [firstHit.id]: true });
@@ -67,7 +63,6 @@ function OperatorInner() {
 
   useEffect(() => { setAvailMap({}); }, [date]);
 
-  // Lazy-load slots when a card is expanded
   const loadSlots = (actId) => {
     if (slotsCache[actId]) return;
     api.activityGet(actId)
@@ -85,7 +80,6 @@ function OperatorInner() {
     }
   };
 
-  // Re-fetch availability for any expanded activity when date changes
   useEffect(() => {
     Object.keys(expanded).forEach((actId) => {
       if (expanded[actId] && !availMap[actId]?.[date]) {
@@ -158,7 +152,7 @@ function OperatorInner() {
     setSubmitError('');
     if (cartLines.length === 0) return;
     if (!user) {
-      router.push(`/login?redirect=${encodeURIComponent(`/operators/${id}`)}`);
+      router.push(`/login?redirect=${encodeURIComponent(`/operators/detail?id=${id}`)}`);
       return;
     }
     setSubmitting(true);
@@ -235,7 +229,6 @@ function OperatorInner() {
     <>
       <Navbar />
 
-      {/* Hero */}
       <div className="op-hero">
         <div className="op-hero-shell">
           <div className="op-hero-badge"><FaBuilding /> Water Sports Company</div>
@@ -361,7 +354,6 @@ function OperatorInner() {
           )}
         </main>
 
-        {/* Sticky cart sidebar (desktop) / drawer trigger (mobile) */}
         <aside className={`op-cart ${mobileCartOpen ? 'is-open' : ''}`}>
           <button className="op-cart-mobile-close" onClick={() => setMobileCartOpen(false)} aria-label="Close cart">×</button>
           <div className="op-cart-inner">
@@ -432,7 +424,6 @@ function OperatorInner() {
           </div>
         </aside>
 
-        {/* Mobile sticky bar */}
         {cartLines.length > 0 && !mobileCartOpen && (
           <button className="op-mobile-bar" onClick={() => setMobileCartOpen(true)}>
             <span><FaShoppingBag /> {cartLines.length} item{cartLines.length > 1 ? 's' : ''}</span>

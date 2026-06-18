@@ -45,7 +45,7 @@ function FeaturedActivities() {
 
         <div className="fa-grid">
           {/* Hero card on the left */}
-          <Link href={`/activities/${hero.id}`} className="fa-card fa-card-hero">
+          <Link href={`/activities/detail?id=${hero.id}`} className="fa-card fa-card-hero">
             <div className="fa-img" style={{ backgroundImage: `url(${hero.image_url})` }} />
             <div className="fa-overlay" />
             <div className="fa-card-body">
@@ -69,7 +69,7 @@ function FeaturedActivities() {
 
           <div className="fa-side">
             {rest.slice(0, 4).map((a) => (
-              <Link key={a.id} href={`/activities/${a.id}`} className="fa-card fa-card-small">
+              <Link key={a.id} href={`/activities/detail?id=${a.id}`} className="fa-card fa-card-small">
                 <div className="fa-img-sm" style={{ backgroundImage: `url(${a.image_url})` }} />
                 <div className="fa-card-sm-body">
                   <span className="fa-cat-sm">{CAT_LABEL[a.category] || a.category}</span>

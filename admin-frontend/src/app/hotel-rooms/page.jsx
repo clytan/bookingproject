@@ -93,7 +93,7 @@ function Inner() {
                 {filtered.map((r) => (
                   <tr
                     key={r.id}
-                    onClick={() => router.push(`/hotels/${r.hotel_id}/edit`)}
+                    onClick={() => router.push(`/hotels/edit?id=${r.hotel_id}`)}
                     style={{ cursor: 'pointer' }}
                   >
                     <td>
@@ -115,7 +115,7 @@ function Inner() {
                     </td>
                     <td onClick={(e) => e.stopPropagation()}>
                       <Link
-                        href={`/hotels/${r.hotel_id}/edit`}
+                        href={`/hotels/edit?id=${r.hotel_id}`}
                         className="icon-action"
                         aria-label="Edit in hotel"
                       >

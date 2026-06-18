@@ -222,7 +222,7 @@ function ActivitiesInner() {
 
           <div className="hotels-grid">
             {filtered.map((a) => (
-              <Link key={a.id} href={`/activities/${a.id}`} className="hotel-card">
+              <Link key={a.id} href={`/activities/detail?id=${a.id}`} className="hotel-card">
                 <div className="hotel-image" style={{ backgroundImage: `url(${a.image_url})` }}>
                   <div className="star-badge"><FaWater /></div>
                 </div>

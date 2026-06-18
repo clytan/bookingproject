@@ -265,7 +265,7 @@ function HotelsInner() {
 
           <div className="hotels-grid">
             {filtered.map((h) => (
-              <Link key={h.id} href={`/hotels/${h.id}${buildQuery({ checkin, checkout, guests })}`} className="hotel-card">
+              <Link key={h.id} href={`/hotels/detail?id=${h.id}${buildQuery({ checkin, checkout, guests }).replace('?', '&')}`} className="hotel-card">
                 <div className="hotel-image" style={{ backgroundImage: `url(${h.image_url})` }}>
                   <div className="star-badge">
                     {Array.from({ length: h.star_rating }).map((_, i) => <FaStar key={i} />)}

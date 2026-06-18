@@ -34,7 +34,7 @@ function FeaturedHotels() {
 
         <div className="fh-grid">
           {hotels.map((h) => (
-            <Link key={h.id} href={`/hotels/${h.id}`} className="fh-card">
+            <Link key={h.id} href={`/hotels/detail?id=${h.id}`} className="fh-card">
               <div className="fh-img" style={{ backgroundImage: `url(${h.image_url})` }}>
                 <div className="fh-rating"><FaStar /> {h.user_rating}</div>
               </div>

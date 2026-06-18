@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, Suspense } from 'react';
-import { useParams, useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { FaStar, FaMapMarkerAlt, FaUsers, FaClock, FaCheckCircle, FaWater, FaBuilding } from 'react-icons/fa';
 import Link from 'next/link';
 import Navbar from '../../../components/Navbar.jsx';
@@ -18,9 +18,9 @@ const CAT_LABEL = {
 };
 
 function ActivityDetailInner() {
-  const { id }   = useParams();
   const router   = useRouter();
   const params   = useSearchParams();
+  const id       = params.get('id');
   const { user, loading: authLoading } = useAuth();
 
   const today = new Date().toISOString().slice(0, 10);
@@ -54,7 +54,7 @@ function ActivityDetailInner() {
   const book = async (slot) => {
     if (authLoading) return;
     if (!user) {
-      router.push(`/login?redirect=${encodeURIComponent(`/activities/${id}?date=${date}&persons=${persons}`)}`);
+      router.push(`/login?redirect=${encodeURIComponent(`/activities/detail?id=${id}&date=${date}&persons=${persons}`)}`);
       return;
     }
     setBookingSlot(slot.id); setBooking(true); setError('');
@@ -124,7 +124,7 @@ function ActivityDetailInner() {
                 <p style={{ marginTop: 14, padding: '12px 16px', background: '#f0f9ff', borderRadius: 10 }}>
                   <FaBuilding style={{ color: 'var(--primary)', marginRight: 8 }} />
                   Operated by{' '}
-                  <Link href={`/operators/${activity.operator_id}`} style={{ color: 'var(--primary)', fontWeight: 700 }}>
+                  <Link href={`/operators/detail?id=${activity.operator_id}`} style={{ color: 'var(--primary)', fontWeight: 700 }}>
                     {activity.operator_name}
                   </Link>
                   {' '}— see all their activities

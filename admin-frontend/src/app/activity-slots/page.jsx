@@ -84,7 +84,7 @@ function Inner() {
               </thead>
               <tbody>
                 {filtered.map((s) => (
-                  <tr key={s.id} onClick={() => router.push(`/activities/${s.activity_id}/edit`)} style={{ cursor: 'pointer' }}>
+                  <tr key={s.id} onClick={() => router.push(`/activities/edit?id=${s.activity_id}`)} style={{ cursor: 'pointer' }}>
                     <td><div className="thumb" style={s.image_url ? { backgroundImage: `url(${s.image_url})` } : undefined} /></td>
                     <td className="strong">{s.slot_label}</td>
                     <td>{s.activity_name}<div className="muted small">{s.activity_city}</div></td>
@@ -95,7 +95,7 @@ function Inner() {
                     <td className="muted">{s.upcoming_bookings}</td>
                     <td><span className={`status-pill ${s.is_active ? 'confirmed' : 'cancelled'}`}>{s.is_active ? 'Active' : 'Disabled'}</span></td>
                     <td onClick={(e) => e.stopPropagation()}>
-                      <Link href={`/activities/${s.activity_id}/edit`} className="icon-action" aria-label="Edit"><FaPencilAlt /></Link>
+                      <Link href={`/activities/edit?id=${s.activity_id}`} className="icon-action" aria-label="Edit"><FaPencilAlt /></Link>
                     </td>
                   </tr>
                 ))}

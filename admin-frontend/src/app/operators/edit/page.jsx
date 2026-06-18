@@ -1,20 +1,21 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useEffect, useState, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { FaWater } from 'react-icons/fa';
-import AuthGuard from '../../../../components/AuthGuard.jsx';
-import Sidebar from '../../../../components/Sidebar.jsx';
-import Header from '../../../../components/Header.jsx';
-import OperatorForm from '../../../../components/OperatorForm.jsx';
-import { api } from '../../../../lib/api';
-import '../../../../styles/Dashboard.css';
-import '../../../../styles/AdminList.css';
-import '../../../../styles/HotelForm.css';
+import AuthGuard from '../../../components/AuthGuard.jsx';
+import Sidebar from '../../../components/Sidebar.jsx';
+import Header from '../../../components/Header.jsx';
+import OperatorForm from '../../../components/OperatorForm.jsx';
+import { api } from '../../../lib/api';
+import '../../../styles/Dashboard.css';
+import '../../../styles/AdminList.css';
+import '../../../styles/HotelForm.css';
 
-export default function EditOperatorPage() {
-  const { id } = useParams();
+function EditOperatorInner() {
+  const params = useSearchParams();
+  const id     = params.get('id');
   const [operator, setOperator] = useState(null);
   const [activities, setActivities] = useState([]);
   const [loading, setLoading]   = useState(true);
@@ -60,7 +61,7 @@ export default function EditOperatorPage() {
                               <td>{a.city}</td>
                               <td className="muted">{a.category}</td>
                               <td><span className={`status-pill ${a.is_active ? 'confirmed' : 'cancelled'}`}>{a.is_active ? 'Active' : 'Disabled'}</span></td>
-                              <td><Link href={`/activities/${a.id}/edit`} className="icon-action">Manage</Link></td>
+                              <td><Link href={`/activities/edit?id=${a.id}`} className="icon-action">Manage</Link></td>
                             </tr>
                           ))}
                         </tbody>
@@ -74,5 +75,13 @@ export default function EditOperatorPage() {
         </div>
       </div>
     </AuthGuard>
+  );
+}
+
+export default function EditOperatorPage() {
+  return (
+    <Suspense fallback={<div style={{ padding: 40 }}>Loading…</div>}>
+      <EditOperatorInner />
+    </Suspense>
   );
 }

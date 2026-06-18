@@ -61,7 +61,7 @@ export default function MyBookingsPage() {
                     <div className="mb-info">
                       <div className="mb-top">
                         <div>
-                          <Link href={`/hotels/${b.hotel_id}`} className="mb-hotel">{b.hotel_name}</Link>
+                          <Link href={`/hotels/detail?id=${b.hotel_id}`} className="mb-hotel">{b.hotel_name}</Link>
                           <div className="mb-meta"><FaMapMarkerAlt /> {b.city}</div>
                         </div>
                         <span className={`mb-pill ${b.status}`}>{b.status}</span>

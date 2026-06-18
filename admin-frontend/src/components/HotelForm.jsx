@@ -48,7 +48,7 @@ export default function HotelForm({ initial = EMPTY, title = 'New Hotel' }) {
         commission_percent: Number(f.commission_percent),
       });
       const id = res.id || f.id;
-      router.push(`/hotels/${id}/edit?saved=1`);
+      router.push(`/hotels/edit?id=${id}&saved=1`);
     } catch (err) { setError(err.message); }
     finally { setSaving(false); }
   };
