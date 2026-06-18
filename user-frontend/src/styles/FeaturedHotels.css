@@ -1,0 +1,158 @@
+.fh-section {
+  padding: 80px 24px 120px;
+  background: var(--bg);
+  position: relative;
+}
+.fh-section::before {
+  content: '';
+  position: absolute;
+  bottom: 15%;
+  left: -8%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.10), transparent 60%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+.fh-shell { max-width: 1280px; margin: 0 auto; position: relative; }
+
+.fh-head {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  gap: 24px; margin-bottom: 48px;
+}
+.fh-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 4.5vw, 52px);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  max-width: 720px;
+}
+.fh-title em {
+  font-style: italic;
+  font-weight: 500;
+  background: var(--aurora-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.fh-see-all {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 13px 24px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  font-weight: 500; font-size: 13.5px;
+  color: var(--text);
+  transition: all 0.22s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.fh-see-all:hover {
+  background: var(--aurora-gradient);
+  border-color: transparent;
+  color: #fff;
+  transform: translateX(2px);
+  box-shadow: var(--glow-primary);
+}
+
+.fh-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 22px;
+}
+
+.fh-card {
+  position: relative;
+  display: flex; flex-direction: column;
+  background: var(--bg-elev-2);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  color: inherit;
+}
+.fh-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-glow);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.fh-img {
+  height: 220px;
+  background-size: cover; background-position: center;
+  position: relative;
+  transition: transform 0.7s ease;
+  filter: saturate(0.85);
+}
+.fh-card:hover .fh-img { transform: scale(1.06); filter: saturate(1); }
+.fh-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(6, 4, 14, 0.4) 100%);
+}
+
+.fh-rating {
+  position: absolute; top: 14px; right: 14px;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px;
+  background: rgba(6, 4, 14, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text);
+  border-radius: 999px;
+  font-weight: 600; font-size: 12px;
+  z-index: 1;
+}
+.fh-rating svg { font-size: 11px; color: var(--warning); }
+
+.fh-body { padding: 22px 24px 24px; display: flex; flex-direction: column; gap: 6px; }
+.fh-body h3 {
+  font-family: var(--font-serif);
+  font-size: 21px; font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+.fh-loc {
+  font-size: 13px; color: var(--text-muted);
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-bottom: 10px;
+}
+.fh-loc svg { font-size: 11px; color: var(--primary); }
+
+.fh-foot {
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+.fh-price {
+  font-family: var(--font-serif);
+  background: var(--aurora-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-weight: 700;
+  font-size: 20px;
+  margin: 0 4px;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+.fh-per { font-size: 11px; }
+
+@media (max-width: 700px) {
+  .fh-section { padding: 40px 16px 70px; }
+  .fh-head { flex-direction: column; align-items: flex-start; gap: 18px; }
+}

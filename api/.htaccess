@@ -1,0 +1,16 @@
+# Forward Authorization header to PHP (required for JWT on shared hosting)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTP:Authorization} ^(.*)
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%1]
+</IfModule>
+
+# Block direct access to config files
+<FilesMatch "(db|jwt)\.php$">
+    <RequireAll>
+        Require all denied
+    </RequireAll>
+</FilesMatch>
+
+# Default index
+DirectoryIndex index.php

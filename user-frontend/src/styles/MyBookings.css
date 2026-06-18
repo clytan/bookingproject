@@ -1,0 +1,206 @@
+.mybookings-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 56px 24px 100px;
+}
+
+.mybookings-page h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 3.5vw, 40px);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.025em;
+}
+
+.mb-subtitle {
+  color: var(--text-muted);
+  margin: 8px 0 36px;
+  font-size: 15px;
+}
+
+.mb-state {
+  padding: 72px 40px;
+  text-align: center;
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  color: var(--text-muted);
+}
+
+.mb-state.error {
+  background: rgba(248, 113, 113, 0.08);
+  color: var(--danger);
+  border-color: rgba(248, 113, 113, 0.2);
+}
+
+.mb-cta {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 11px 22px;
+  background: var(--aurora-gradient);
+  background-size: 200% 200%;
+  color: #fff;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 13.5px;
+  box-shadow: var(--glow-primary);
+  transition: background-position 0.4s, transform 0.15s, box-shadow 0.3s;
+}
+.mb-cta:hover {
+  background-position: 100% 50%;
+  transform: translateY(-1px);
+  box-shadow: var(--glow-primary-hover);
+}
+
+.mb-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.mb-card {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  background: var(--bg-elev-2);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+.mb-card:hover {
+  border-color: var(--border-glow);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+.mb-image {
+  background-size: cover;
+  background-position: center;
+  min-height: 200px;
+  filter: saturate(0.9);
+}
+
+.mb-info {
+  padding: 22px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.mb-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.mb-hotel {
+  font-family: var(--font-serif);
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  transition: color 0.2s;
+}
+
+.mb-hotel:hover { color: var(--primary); }
+
+.mb-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.mb-meta svg { color: var(--primary); }
+
+.mb-pill {
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  border: 1px solid;
+}
+
+.mb-pill.confirmed { background: rgba(52, 211, 153, 0.12); color: var(--success); border-color: rgba(52, 211, 153, 0.30); }
+.mb-pill.pending   { background: rgba(251, 191, 36, 0.12); color: var(--warning); border-color: rgba(251, 191, 36, 0.30); }
+.mb-pill.cancelled { background: rgba(248, 113, 113, 0.12); color: var(--danger);  border-color: rgba(248, 113, 113, 0.30); }
+.mb-pill.completed { background: rgba(96, 165, 250, 0.12); color: var(--blue);     border-color: rgba(96, 165, 250, 0.30); }
+
+.mb-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.mb-row > div {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mb-row svg { color: var(--primary); font-size: 12px; }
+
+.mb-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.mb-code { font-size: 13px; color: var(--text-muted); }
+.mb-code code {
+  font-family: var(--font-mono);
+  color: var(--primary);
+  background: rgba(167, 139, 250, 0.10);
+  border: 1px solid rgba(167, 139, 250, 0.20);
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+.mb-total {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 700;
+  background: var(--aurora-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  margin-left: auto;
+  letter-spacing: -0.01em;
+}
+
+.mb-cancel {
+  padding: 9px 16px;
+  background: rgba(248, 113, 113, 0.10);
+  border: 1px solid rgba(248, 113, 113, 0.25);
+  color: var(--danger);
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.2s, border-color 0.2s;
+}
+.mb-cancel:hover {
+  background: rgba(248, 113, 113, 0.18);
+  border-color: rgba(248, 113, 113, 0.4);
+}
+
+@media (max-width: 700px) {
+  .mb-card { grid-template-columns: 1fr; }
+  .mb-image { min-height: 160px; }
+}

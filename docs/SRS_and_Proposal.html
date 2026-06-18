@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>COKALO — SRS &amp; Commercial Proposal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary:        #6D28D9;
+    --primary-dark:   #4C1D95;
+    --primary-darker: #2E1065;
+    --primary-light:  #F3E8FF;
+    --primary-soft:   #E9D5FF;
+    --blue:           #1E40AF;
+    --blue-light:     #DBEAFE;
+    --text-dark:      #0F0B1F;
+    --text-muted:     #5B6478;
+    --border:         #E5E0F0;
+    --border-soft:    #F1ECF8;
+    --bg-soft:        #FBFAFD;
+    --bg-tint:        #F7F4FB;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, 'Segoe UI', Arial, sans-serif;
+    font-size: 10.5pt;
+    color: var(--text-dark);
+    line-height: 1.6;
+    background: #ECEAF2;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* --- Page metaphor — each .sheet renders like an A4 page on screen --- */
+  .sheet {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 16px auto;
+    background: white;
+    padding: 22mm 20mm;
+    box-shadow: 0 6px 24px rgba(46, 16, 101, 0.10);
+    position: relative;
+  }
+
+  /* --- Cover page --- */
+  .cover {
+    background:
+      radial-gradient(680px 420px at 80% 0%, rgba(255,255,255,0.10), transparent 60%),
+      radial-gradient(540px 320px at 0% 100%, rgba(103, 232, 249, 0.18), transparent 60%),
+      linear-gradient(135deg, #2E1065 0%, #4C1D95 40%, #1E40AF 100%);
+    color: white;
+    padding: 30mm 22mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 297mm;
+  }
+  .cover-top { display: flex; align-items: center; gap: 14px; }
+  .cover-logo {
+    width: 56px; height: 56px; border-radius: 12px; object-fit: cover;
+    background: white;
+  }
+  .cover-brand {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 22pt; font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .cover-eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 9.5pt;
+    color: rgba(255,255,255,0.78);
+    margin-bottom: 14px;
+  }
+  .cover-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 42pt; font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    max-width: 165mm;
+  }
+  .cover-title em { font-style: italic; font-weight: 500; color: #C4B5FD; }
+  .cover-sub {
+    font-size: 12pt;
+    opacity: 0.86;
+    margin-top: 22px;
+    max-width: 150mm;
+    line-height: 1.55;
+  }
+  .cover-meta {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px 28px;
+    padding-top: 26px;
+    border-top: 1px solid rgba(255,255,255,0.22);
+    font-size: 10pt;
+  }
+  .cover-meta dt { opacity: 0.7; text-transform: uppercase; letter-spacing: 0.10em; font-size: 8.5pt; margin-bottom: 3px; }
+  .cover-meta dd { font-weight: 600; margin: 0; }
+
+  /* --- Headings --- */
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: var(--primary-darker);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  h1 {
+    font-size: 24pt; font-weight: 700;
+    margin: 0 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 3px solid var(--primary);
+  }
+  h2 {
+    font-size: 17pt; font-weight: 700;
+    margin: 28px 0 12px;
+    padding-left: 12px;
+    border-left: 4px solid var(--primary);
+  }
+  h3 {
+    font-size: 13pt; font-weight: 700;
+    color: var(--blue);
+    margin: 22px 0 8px;
+  }
+  h4 {
+    font-size: 11pt; font-weight: 700;
+    color: var(--primary);
+    margin: 16px 0 6px;
+  }
+
+  /* Force a page break before each top-level "## N. ..." section */
+  h2 { page-break-before: always; break-before: page; }
+  /* Don't break before the first h2 right after the cover */
+  .sheet:first-of-type + .sheet h2:first-child,
+  h2:first-child { page-break-before: avoid; break-before: auto; }
+
+  /* CRITICAL: never let a heading sit alone at the bottom of a page —
+     always keep it attached to whatever comes next (paragraph/table/list). */
+  h1, h2, h3, h4 {
+    page-break-after: avoid;
+    break-after: avoid-page;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  /* And the element immediately after a heading shouldn't break inside either,
+     which gives the browser a strong "keep these together" hint. */
+  h2 + p, h2 + ul, h2 + ol, h2 + table, h2 + blockquote,
+  h3 + p, h3 + ul, h3 + ol, h3 + table, h3 + blockquote {
+    page-break-before: avoid;
+    break-before: avoid-page;
+  }
+
+  /* --- Body text --- */
+  p { margin: 7px 0 10px; }
+  strong { color: var(--primary-darker); font-weight: 700; }
+  em { color: var(--primary); font-style: italic; }
+
+  /* --- Lists --- */
+  ul, ol { margin: 6px 0 12px 22px; padding: 0; }
+  li { margin: 4px 0; }
+  ul li::marker { color: var(--primary); }
+  ol li::marker { color: var(--primary); font-weight: 700; }
+
+  /* --- Inline code --- */
+  code {
+    font-family: 'Consolas', 'SF Mono', Menlo, monospace;
+    font-size: 9.5pt;
+    background: var(--primary-light);
+    color: var(--primary-darker);
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+
+  /* --- Code blocks (used by architecture diagram) --- */
+  pre {
+    background: #0E0B1E; color: #E9D5FF;
+    padding: 14px 18px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: 'Consolas', 'SF Mono', Menlo, monospace;
+    font-size: 8.5pt;
+    line-height: 1.45;
+    margin: 12px 0;
+    page-break-inside: avoid;
+  }
+  pre code { background: transparent; color: inherit; padding: 0; font-size: inherit; }
+
+  /* --- Tables — allowed to span pages with header row repeating --- */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0 16px;
+    font-size: 10pt;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  /* Repeat the header row on every page the table spans */
+  thead { display: table-header-group; background: linear-gradient(135deg, var(--primary), var(--blue)); }
+  tbody { display: table-row-group; }
+  thead th {
+    color: white;
+    text-align: left;
+    padding: 10px 14px;
+    font-weight: 700;
+    font-size: 9.5pt;
+    letter-spacing: 0.02em;
+    border: none;
+  }
+  tbody td {
+    padding: 8px 14px;
+    vertical-align: top;
+    border-top: 1px solid var(--border-soft);
+  }
+  tbody tr:nth-child(even) td { background: var(--bg-soft); }
+  tbody tr td:first-child { font-weight: 600; color: var(--primary-darker); }
+  /* Individual rows must never split across pages */
+  tbody tr { page-break-inside: avoid; break-inside: avoid; }
+  /* keep id columns mono */
+  tbody tr td:first-child code { font-weight: 700; }
+
+  /* --- Blockquotes (used for callouts like "Important constraint…") --- */
+  blockquote {
+    border-left: 4px solid var(--primary);
+    background: var(--primary-light);
+    color: var(--primary-darker);
+    margin: 14px 0;
+    padding: 12px 18px;
+    border-radius: 0 10px 10px 0;
+    font-style: italic;
+    page-break-inside: avoid;
+  }
+  blockquote p { margin: 0; }
+
+  /* --- Horizontal rule between major sections --- */
+  hr {
+    border: none;
+    border-top: 1px dashed var(--border);
+    margin: 28px 0;
+  }
+
+  /* --- Footer (printed on every page) --- */
+  .footer {
+    position: fixed;
+    bottom: 8mm;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 8.5pt;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+  }
+
+  /* --- Print rules --- */
+  @page {
+    size: A4;
+    margin: 18mm 16mm 18mm 16mm;
+  }
+  @media print {
+    body { background: white; }
+    .sheet {
+      margin: 0;
+      padding: 0;
+      width: auto;
+      min-height: 0;
+      box-shadow: none;
+      page-break-after: always;
+    }
+    .sheet:last-child { page-break-after: auto; }
+    .cover { padding: 24mm 18mm; min-height: 0; height: 100vh; }
+    a { color: var(--primary); text-decoration: none; }
+    /* Hide screen-only nav helper if we ever add one */
+    .screen-only { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ======================= COVER PAGE ======================= -->
+<section class="sheet cover">
+  <div>
+    <div class="cover-top">
+      <img class="cover-logo" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wgARCAFqAwcDASIAAhEBAxEB/8QAGwABAQADAQEBAAAAAAAAAAAAAAIDBAUBBgf/xAAZAQEAAwEBAAAAAAAAAAAAAAAAAQIDBAX/2gAMAwEAAhADEAAAAvpamqSAmpKABNTQAmpKABNTQAmpKABNTQAmpKABNTQAmpKABNTQAmpKABNTQAmpKABNTQAmpKABNTQAmpKABNTQAmpKBjpRKhM5JChKhjpRKhM5JChKhjpRKhM5JChKhjpRKhM5JChKhjpRKhM5JChKhjpRKhM5JChKhjpRKhM5JChKhjpRKhM5JChKhjpRKhM5JChKhjpRKhM5JChNTQAmpKABNTQAmpKABNTQAmpKABNTQAmpKABNTQAmpKABNTQAmpKABNTQAmpKABNTQAmpKABNTQAmpKABNTQAmpKBNY6KSKl4WkUkKj0pIqUmRIpIVjopIqXhaRSQqPSkipSZEikhWOikipSZEikhWOikipSZEikhWOikipSZEikhUelJFS8LSKSFY6KSKlJkSKSFR6UkVLwtIVNACakoAE1NACakoAE1NACakoAE1NACakoAE1NACakoAE1NACakoAE1NACakoAE1NACakoAE1NACakoAE1NACakoE1NACakoAE1NACakoAE1NACakoAE1NACakoAE1NACakoAE1NACakoAE1NACakoAE1NACakoAE1NACakoAE1NACakoGOlEqEzkkKEqGOlEqEzkkKEqGOsWVBRMzkkKEqGOlEqEzkkKEqGOlEqEzkkKEqGOlEqEzkkKEqGOlEqEzkkKEqEeqJUJnJIUJUMdKJUJnJIUJUMdKJUJnJIUJqaAE1JQAJqaAE1JR4eg1PfNTPl6083gaafWT8Ss+8v4ntnbY8ldpqaAE1JQAJqaAE1JQAJqaAE1JQAJqaAE1JQAJqaAE1JQAJqaAE1JQAJqaAE1JQJrHRSRUpMiRSQrHRSRUpMmHJ5M8bqcDB3a/Sa/M6vmcWvx+7r25/jY+m+b16ZquvXXN9T+efQ3x+mrFee9JFSkyJFJCsdFJFSkyJFJCsdFJFSkyJFJCsdFJFSkyJFJCsdFJFSkyJFJCsdFJFSkyJFJCsdFJFSkyJCpoATUlAAmpoATUlA0OH9XxumeVv8zPvp28ett+RwafJ7eHqxx9KcXF7WH5vo8now+53uJ29MArompKA1M/zpqYPsssx8l9Nyfmz9C1s3Oxjb2eT1YeYMGGtd7Y19jW7Fl5kRtZObs5xvReHe8Xztjnz3amunRGPQyruzpsadLLydjS28N7zU0AJqSgATU0AJqSgATU0AJqSgTU0AJqSgATU0AJqSgOF3eRbH4fJEzp1+58h2ejPuYKjl5djldH5HL2dfz1vyfYfQ8TtqDiU1yamz15fOfQ8Tln1mWkJqaHwv3Xy0t7LzejjnO/zaxr7uanXvbypro0xcva0+bLI2+fSO3ii+nXmbOnt8+W/75HVtzWLe5MdjzPPVrzMfR5fNl1c+jvdGs1NXkBNSUACamgBNSUACamgBNSUDHSiVCZySFCVCPVEqEzkkKE6m75Nfz3V+n5u/PeTye/m293lZ+Dq1uFU4dXmzr/T3x7O95dLz8X9t8Yt9Ns8rrw8/P8A9D+Fl9nOX5Y+ppUJ+Z+o+NlvbW/zcc/Muv2sq8fp8qkduojp35jB7yc/V5nnkzubvH62l+VuaG5nTpRk96t+FuafnLh3p183Vt5x9jV58ujvYNnfXHSrTKhM5JChKhjpRKhM5JChKhjpRKhM5JChNTQAmpKABNTQAmpKA894WlMOjX0vVy/G4vq+Hz35et0PK6c+uv2zlfVXkraflfquPGmWtjbh8H9ni5Uuvw+j1j34T7vAfPfS8KjYw9Lag+f+g5+dOX9Hob5zub9Ho1jUyZaRyutO6muP2da9uJubFZ05LqIjmbG1lmXI+jw3twXSnLPn7u5t3uG2k1NACakoAE1NACakoAE1NACakoE1jopIqXhaRSQrHRSRUpMiRyeH9fPThq9HHXPtUkTinPE1q49i1JCsekdFIqUmRIpIViotIqUmRIpIVjopIqUmRAtIVobRlTqmxWHIZEikhWOikipeFpFJCsdFJFSkyJFJCsdFJFSkyJCpoATUlAAmpoATUlAAmpoAc3paJl2MeubmLzROlp+5TP7o2bc6g3fdbYPU0c/ZxbJjvF4bPmnkNhhxG21MR0GqNv3Q2TNiy6h7WbEZmpRg6Gl4b2vOA6Ua42vNT0vY0ht3pbh6BNSUACamgBNSUACamgBNSUCamgBNSUACamgBNSUACamgBr7EmKdkaeSNsxqoxZPR5jyyPfRFhh8y0MWUYquSGUIsY1UTOQJqTDmoY6oYLqiYyiVSQyjFVjDkUAJqSgATU0AJqSgATU0AJqSgY6USoTOSQoSoY6USoTOSQoSoY6USoTOSQoYroY6USoTOSQoSoY6USoTOSQoSoY6USoTOSQoSoY6USoTOSQoSoY6USoTOSQoSoY6USoTOSQoSoY6USoTOSQoTU0AJqSgATU0AJqSgATU0AJqSgATU0AJqSgATU0AJqSgATU0AJqSgATU0AJqSgATU0AJqSgATU0AJqSgATU0AJqSgTWOikipSZEikhUelJFSkyJFJCsdFJFSkyJFJCsdFJFSkyJFJCsdFJFSkyJFJCsdFJFSkyJFJCsdFJFSkyJFJCsdFJFSkyJFJCsdFJFSkyJFJCsdFJFSkyJCpoATUlAAmpoATUlAAmpoATUlAAmpoATUlAAmpoATUlAAmpoATUlAAmpoATUlAAmpoATUlAAmpoATUlAAmpoATUlAmpoATUlAAmpoATUlAAmpoATUlAAmpoATUlAAmpoATUlAAmpoATUlAAmpoATUlAAmpoATUlAAmpoATUlAAmpoATUlAx0olQny5ChKhHqiVCZySFCVDHSiVCfLkKEqGOlEqEzkkKEqGOlEqEzkkKEqGOlEqEzkkKEqGOlEqEzkkKEqEeqJUJ8uQoSoY6USoTOSQoSoR6olQmckhQmpoATUlAAmpoATUlAAmpoATUlAAmpoATUlAAmpoATUlAAmpoATUlAAmpoATUlAAmpoATUlAAmpoATUlAAmpoATUlA//2gAMAwEAAgADAAAAIaw1ww6w1ww6w1ww6w1ww6w1ww6w1ww6w1ww6w1ww6w1ww6w1w+8988+8988+8988+8988+8988+8988+8988+8988+8988+8986w1ww6w1ww6w1ww6w1ww6w1ww6w1ww6w1ww6w1ww6w1ww6w1w7z2zz5z3zz7z2zz5z3zz7z3zz7z3zz7z3zz5z2zz7z3zz5z2z6w1ww6w1ww6w1ww6w1ww6w1ww6w1ww6w1ww6w1ww6w1ww6w1w6w1ww6w1ww6w1ww6w1ww6w1ww6w1ww6w1ww6w1ww6w1ww6w1w+8988+8988/M988+8988+8988+8988+898828988+8988+8986w1ww6w1xw7C26wqw1ww6w1ww6w1ww6w1ww6w1ww6w1ww6w1w7z3zz7z33JIgl2bbz3zz7z3zz7z3zz7z3zz7z3zz7z3zz7z3z6w1ww6w1w52fLZiig1wzl2ypuQxeFO61HRA6w1ww6w1ww6w1w6w1ww6w1w1Ex7NsQB5Es6xEeFK4K/lesly4qw1ww6w1ww6w1w+898828984BtDokc9PwlM8CTvYH20r4uOUWO8988+8988+8986w1ww6w1w0BmuzIuI8tBIIh7IvXo2HHJC2g6w1ww6w1ww6w1w7z2zz7z3z8LnyJj6z3zz7z3zz7z3zzyz1zz7z2zz7z3zz7z3z6w1ww6w1ww6w1/wDdd9Oct9M/OtctdNsOsNMcsNcMOsNcMOsNcOsNcMOsNcMOsMePssPcOPsMcNOvMdONsPeMMsNcMOsNcMOsNcPvPfPPvPfPPvPfPPvPfPPvPfPPvPfPPvPfPPvPfPPvPfPPvPfOsNcMOsNcMOsNcMOsNcMOsNcMOsNcMOsNcMOsNcMOsNcMOsNcO8988+c988+8988+8988+8988+8988+8988+8988+8988+898+sNcMOsNcMOsNcMOsNcMOsNcMOsNcMOsNcMOsNcMOsNcMOsNcOsNcMOsNcMOsNcMOsNcMOsNcMOsNcMOsNcMOsNcMOsNcMOsNcPvOfPNvPfPPvOfPPvPfPPvPfPPvPfPPvPfPNvOfPPvPfPNvPfOsNcMOsNcMOsNcMOsNcMOsNcMOsNcMOsNcMOsNcMOsNcMOsNcP8A/9oADAMBAAIAAwAAABBX2n31X2n31X2n31X2n31X2n31X2n31X2n31X2n31X2n31X2n2U1k02U1k02U1k02U1k02U1k02U1k02U1k02U1k02U1k02U1k1X2n31X2n31X2n31X2n31X2n31X2n31X2n31X2n31X2n31X2n1nGHHFHGXHFnGHHFHGXHFnGXHFnGXHFnGXHFHGHHFnGXHFHGHFX2n31X2n31X2n31X2n31X2n31X2n31X2n31X2n31X2n31X2n1X2n31X2n31X2n31X2n31X2n31X2n31X2n31X2n31X2n31X2n2U1k02U1k0201k02U1k02U1k02U1k02U1k00U1k02U1k02U1k1X2n31X2n33mcLfZX2n31X2n31X2n31X2n31X2n31X2n31X2n1nGXHFnGWJsVVmuRDGXHFnGXHFnGXHFnGXHFnGXHFnGXHFnGXFX2n31X2n1l5Sxmhz2n2unLGJtbv7ixWC5P1X2n31X2n31X2n1X2n31X2n2gJ3bR134ES1XoF3RVFY+gdsu35X2n31X2n31X2n2U1k00U1k0mcOyLYxppjm05eeipnbw/QtiISU1k02U1k02U1k1X2n31X2n2Wfu7TVHYCG0p+4tqvt7qxJnHr1X2n31X2n31X2n1nGHHFnGXFFvDVHE7GXHFnGXHFnGX3HLCzHFnGHHFnGXHFnGXFX2n31X2n31X17J6aJJT0roJ65Z7jq6o5IYbj2n31X2n31X2n1X2n31X2n31X2lyYW2l31T1jx3X2mz1R2lzyX2n31X2n31X2n2U1k02U1k02U1k02U1k02U1k02U1k02U1k02U1k02U1k02U1k1X2n31X2n31X2n31X2n31X2n31X2n31X2n31X2n31X2n31X2n1nGXHFHGXHFnGXHFnGXHFnGXHFnGXHFnGXHFnGXHFnGXHFnGXFX2n31X2n31X2n31X2n31X2n31X2n31X2n31X2n31X2n31X2n1X2n31X2n31X2n31X2n31X2n31X2n31X2n31X2n31X2n31X2n2U0k00U1k02U0k02U1k02U1k02U1k02U1k00U0k02U1k00U1k1X2n31X2n31X2n31X2n31X2n31X2n31X2n31X2n31X2n31X2n3//xAA1EQABBAECBAMECAcAAAAAAAABAAIDBBEFEhMhMUEQMlEgIkBhBhRQcYCBkaEVIyQwscHw/9oACAECAQE/APwYB2Tj7Rhn/nyNKjG9CJiNfPkKILTg/Zcbtjw70VjRa11vFj90n0Wv6bLpNwOzkO5g/wCVQsNmHuotwpbUUBAkdhDbZZy69l0+y9H1cwDgy+Xt8lfp1darmJxz6EdirdGxpNrhycj2PYhQTGaM5HvDsntksyF7lpkc9cAHyq03EnLv7AHcrePRbQ4ZatTsyV2tMa0y3LYLuIeit6pIJNsPQKnxjHumPMrUrTq0Y2dSqWpSyTBkp5FWHlkTnN6gKrqViSZrHHkT4XtTEB4cfNyOqWs53fsqerF7tk/6/EweZMe5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" alt="COKALO">
+      <span class="cover-brand">COKALO</span>
+    </div>
+  </div>
+
+  <div>
+    <div class="cover-eyebrow">Explore. Discover. Celebrate.</div>
+    <h1 class="cover-title">Software Requirements &amp; <em>Commercial Proposal</em></h1>
+    <p class="cover-sub">A consumer travel platform for <strong style="color:#C4B5FD">hotels</strong>, <strong style="color:#C4B5FD">water-sport experiences</strong>, and <strong style="color:#C4B5FD">bus tickets</strong> — built for the Indian market.</p>
+  </div>
+
+  <dl class="cover-meta">
+    <div><dt>Project</dt><dd>COKALO Travel Booking Platform</dd></div>
+    <div><dt>Modules</dt><dd>Hotels · Water Activities · Bus (3rd-party API integration)</dd></div>
+    <div><dt>Prepared by</dt><dd>Codersdek</dd></div>
+    <div><dt>Document version</dt><dd>v1.1</dd></div>
+    <div><dt>Date</dt><dd>2026-05-24</dd></div>
+    <div><dt>Validity</dt><dd>15 days from above</dd></div>
+  </dl>
+</section>
+
+<!-- ======================= BODY ======================= -->
+<section class="sheet">
+  <h2>1. Executive Summary</h2>
+<p>COKALO is a consumer travel platform that lets travellers discover and book three product lines on a single site:</p>
+<ol>
+<li><strong>Hotels</strong> — search, filter, and book rooms across cities.</li>
+<li><strong>Water Activities</strong> — discover water-sport operators (&quot;companies&quot;) and book one or more activities in a single transaction.</li>
+<li><strong>Bus tickets</strong> — search routes, view schedules, and book seats. Inventory and fulfilment delivered through a third-party bus aggregator API (e.g. RedBus / ITS / equivalent).</li>
+</ol>
+<p>The platform comprises:</p>
+<ul>
+<li><strong>Customer web app</strong> (public)</li>
+<li><strong>Admin panel</strong> (platform operator&#39;s internal team)</li>
+<li><strong>Hotel manager portal</strong> (each hotel runs their own listings &amp; bookings)</li>
+<li><strong>Activity operator portal</strong> (each water-sports company runs their own activities &amp; bookings)</li>
+<li><strong>REST API backend</strong> (PHP + MySQL)</li>
+</ul>
+<p>This document captures the agreed scope, deliverables, timeline, quote, and commercial terms for the 3-month development engagement.</p>
+<hr>
+<h2>2. Project Scope</h2>
+<h3>2.1 In Scope</h3>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Hotels module</strong></td>
+<td>Full booking pipeline — discovery, detail page, availability check, booking, manager portal, admin oversight.</td>
+</tr>
+<tr>
+<td><strong>Water Activities module</strong></td>
+<td>Full booking pipeline incl. multi-activity cart, operator portal, admin oversight.</td>
+</tr>
+<tr>
+<td><strong>Bus module</strong></td>
+<td>Customer-facing search → seat selection → booking → ticket. Inventory &amp; fulfilment via <strong>one</strong> third-party bus API (provider mutually selected at kickoff).</td>
+</tr>
+<tr>
+<td><strong>User authentication</strong></td>
+<td>Email + OTP (login + signup), optional password fallback.</td>
+</tr>
+<tr>
+<td><strong>Admin panel</strong></td>
+<td>Property/operator CRUD, listings management, bookings oversight, reports/analytics for hotels &amp; activities.</td>
+</tr>
+<tr>
+<td><strong>Manager portals</strong></td>
+<td>Independent dashboards for hotel managers and water-sport operators to manage their listings, slots/rooms, bookings, and walk-in entries.</td>
+</tr>
+<tr>
+<td><strong>Advanced dashboards</strong></td>
+<td>Sensible, role-specific dashboards for users, managers, operators, and admin. &quot;Advanced&quot; here means well-designed and useful — not BI / data-science depth. See Section 7.5 for the exact list of widgets included and Section 2.2 #14 for what is <strong>not</strong> considered part of &quot;advanced&quot;.</td>
+</tr>
+<tr>
+<td><strong>GST module</strong></td>
+<td>Configurable GST rate, per-booking tax calculation, GST shown on invoice and admin reports.</td>
+</tr>
+<tr>
+<td><strong>Commission module</strong></td>
+<td>Per-vendor commission percentage (different rates per hotel / per operator / for bus aggregator). Platform splits gross / commission / net at booking time. Vendor and admin can view their split. See Section 7.4.</td>
+</tr>
+<tr>
+<td><strong>Responsive UI</strong></td>
+<td>Desktop + mobile web (no native iOS/Android app).</td>
+</tr>
+<tr>
+<td><strong>Email notifications</strong></td>
+<td>OTP, booking confirmation, status updates. SMTP via Codersdek&#39;s mail server or client-supplied SMTP.</td>
+</tr>
+<tr>
+<td><strong>Deployment</strong></td>
+<td>One round of deployment to client&#39;s chosen hosting (cPanel / shared host / VPS). India region.</td>
+</tr>
+<tr>
+<td><strong>Vendor-specific API modifications (during build window only)</strong></td>
+<td>If a <strong>hotel</strong>, a <strong>water-sports operator</strong>, or the chosen <strong>bus aggregator</strong> has their own API / PMS / back-office that requires custom integration to onboard, those modifications <strong>are included — but only during the active 3-month build window</strong>. Once the project goes live and the M4 milestone is signed off, any such API integration or modification becomes a paid change-request. See Section 2.2 #2 and Section 14.</td>
+</tr>
+<tr>
+<td><strong>Manual hotels / operators use the COKALO portals</strong></td>
+<td>Hotels and water-sports operators without their own API/back-office systems are onboarded through the <strong>Hotel Manager portal</strong> and <strong>Activity Operator portal</strong> built into COKALO. Their staff log in and manage rooms / slots / bookings using the platform&#39;s standard flows. No custom dashboards, no per-vendor branding, no bespoke flows.</td>
+</tr>
+</tbody></table>
+<h3>2.2 Out of Scope (explicitly excluded)</h3>
+<ol>
+<li><strong>Native mobile apps</strong> (iOS / Android).</li>
+<li><strong>Post-launch custom modifications for individual hotels, operators, or bus carriers.</strong> During the active 3-month build window (Section 11), custom integrations / modifications required to onboard a specific hotel&#39;s PMS, an operator&#39;s existing back-office, or the chosen bus aggregator are <strong>included</strong>. <strong>After the M4 sign-off</strong>, all such requests — including newly-onboarded hotels/operators that bring their own APIs — are paid change-requests billed at Codersdek&#39;s hourly rate. The platform itself remains a single-tenant codebase; per-property branding, white-labelling, or bespoke booking flows for any single vendor are not part of the base build.</li>
+<li><strong>Bus operator panel.</strong> Bus inventory is consumed entirely from the third-party API. There is no fleet / route / schedule management UI for bus operators on COKALO.</li>
+<li><strong>Multiple bus API integrations.</strong> One provider only. Switching providers, supporting fallback providers, or aggregating multiple APIs is out of scope.</li>
+<li><strong>Third-party service costs.</strong> Codersdek&#39;s fee covers development only. The following are <strong>billed separately</strong> and paid for by the client:<ul>
+<li>Bus aggregator API subscription &amp; per-booking fees (RedBus, ITS, etc.)</li>
+<li>Payment-gateway fees (Razorpay / Stripe / etc.)</li>
+<li>SMS / WhatsApp messaging fees</li>
+<li>SMTP / transactional-email service fees (if not using cPanel mailbox)</li>
+<li>Hosting, domain, SSL certificate</li>
+<li>Map / geocoding API usage (if added)</li>
+</ul>
+</li>
+<li><strong>Payment-gateway integration</strong> beyond a single provider (e.g. Razorpay). Multiple gateways or wallet-by-wallet integrations are out of scope.</li>
+<li><strong>Indian market only.</strong> The platform is built for the Indian market — INR currency, IST timezone, Indian phone-number formats, Indian GST tax structure, Indian payment gateway. International support (multi-currency, multi-timezone, foreign payment methods, VAT/sales-tax, non-Indian addresses) is <strong>not</strong> in scope.</li>
+<li><strong>Multi-language / i18n.</strong> English only.</li>
+<li><strong>Multi-currency.</strong> INR only.</li>
+<li><strong>SEO content writing, copywriting, and stock photography.</strong> Client supplies hotel/activity images and descriptive text.</li>
+<li><strong>Server administration after handover.</strong> One-time deployment is included; ongoing DevOps and server upkeep is not.</li>
+<li><strong>Source-code modifications after final sign-off.</strong> Bug fixes related to the delivered scope are covered for <strong>30 days post-launch</strong>. New features or scope changes after that period are change-requests, billed separately.</li>
+<li><strong>Post-delivery maintenance / AMC.</strong> Ongoing maintenance, support, monitoring, server patching, security updates, third-party API change handling, performance tuning, periodic enhancements, and small feature additions after the 30-day bug-fix window are <strong>explicitly out of scope</strong> of this quote and are <strong>billed separately</strong> under a maintenance agreement (AMC) or per change-request. See Section 15.5.</li>
+<li><strong>Enterprise-grade analytics / BI.</strong> &quot;Advanced dashboards&quot; in this SRS means the curated widget set listed in Section 7.5 (revenue trends, occupancy, source mix, top performers, etc.). The following are <strong>not</strong> part of &quot;advanced&quot; and are out of scope: custom report builders, ad-hoc SQL, data-warehouse / OLAP cube, cohort and funnel analytics, predictive models, real-time streaming dashboards, drill-down BI tools, export to BI platforms (Tableau/Power BI/Looker).</li>
+</ol>
+<hr>
+<h2>3. System Architecture</h2>
+<pre><code>                        ┌────────────────────────────┐
+                        │     Customer Web App       │
+                        │  (Next.js, public users)   │
+                        └────────────┬───────────────┘
+                                     │ REST/JSON
+       ┌─────────────────────────────┼──────────────────────────────┐
+       │                             │                              │
+       ▼                             ▼                              ▼
+┌─────────────┐              ┌──────────────┐               ┌─────────────────┐
+│ Admin Panel │              │ Manager App  │               │ Operator App    │
+│   (Next.js) │              │ Hotel staff  │               │ Water-sport co. │
+└──────┬──────┘              └──────┬───────┘               └──────────┬──────┘
+       │                             │                                  │
+       └──────────────┬──────────────┴──────────────────────────────────┘
+                      ▼
+            ┌─────────────────────┐               ┌────────────────────────┐
+            │  PHP REST API       │◄────────────► │  Bus Aggregator API    │
+            │  (Hotel/Activity/   │   server-to-  │  (3rd-party — RedBus,  │
+            │   Bus, Auth, OTP)   │     server    │   ITS, etc.)           │
+            └──────────┬──────────┘               └────────────────────────┘
+                       │
+                       ▼
+                 ┌──────────────┐
+                 │  MySQL       │
+                 └──────────────┘
+</code></pre>
+<h3>3.1 Components</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Customer Web App</strong></td>
+<td>Browse hotels/activities/buses, book, manage own bookings, login (email OTP / password).</td>
+</tr>
+<tr>
+<td><strong>Admin Panel</strong></td>
+<td>CRUD for hotels, activities, operators, bookings oversight, reports.</td>
+</tr>
+<tr>
+<td><strong>Hotel Manager App</strong></td>
+<td>Per-hotel dashboard — manage rooms, view/manage bookings, walk-ins.</td>
+</tr>
+<tr>
+<td><strong>Activity Operator App</strong></td>
+<td>Per-operator dashboard — manage activities and slots across cities, view/manage bookings, walk-ins.</td>
+</tr>
+<tr>
+<td><strong>PHP REST API</strong></td>
+<td>Authoritative source for all data; JWT-secured endpoints; pluggable mailer (PHPMailer + SMTP).</td>
+</tr>
+<tr>
+<td><strong>MySQL DB</strong></td>
+<td>Single relational DB (<code>busgo_db</code>).</td>
+</tr>
+<tr>
+<td><strong>Bus Aggregator API</strong></td>
+<td>External provider for bus inventory, seat layout, hold, ticket. Specifics depend on the selected provider&#39;s contract.</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>4. Module 1 — Hotels</h2>
+<h3>4.1 Customer-facing requirements</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>H-C01</td>
+<td>Hotels listing page filterable by city, price range, star rating, guest rating, property type (Hotel / Resort / Service Apartment / Independent House / Villa / Guest House / Hostel / Boutique / Apartment), guest capacity, and amenities.</td>
+</tr>
+<tr>
+<td>H-C02</td>
+<td>Hotel detail page with image, description, address, amenities, list of bookable rooms.</td>
+</tr>
+<tr>
+<td>H-C03</td>
+<td>Date-range availability check (check-in / check-out / guests).</td>
+</tr>
+<tr>
+<td>H-C04</td>
+<td>Single-room booking flow with instant confirmation and booking code.</td>
+</tr>
+<tr>
+<td>H-C05</td>
+<td>Email confirmation after successful booking.</td>
+</tr>
+<tr>
+<td>H-C06</td>
+<td>&quot;My Bookings&quot; page — view all current and past hotel bookings, cancel where allowed.</td>
+</tr>
+</tbody></table>
+<h3>4.2 Hotel Manager portal</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>H-M01</td>
+<td>Login (separate JWT realm).</td>
+</tr>
+<tr>
+<td>H-M02</td>
+<td>Dashboard with today&#39;s check-ins, check-outs, current guests, month bookings, month revenue.</td>
+</tr>
+<tr>
+<td>H-M03</td>
+<td>Edit own hotel profile (name, city, address, description, image, amenities). Star rating and guest rating are admin-managed only.</td>
+</tr>
+<tr>
+<td>H-M04</td>
+<td>Rooms CRUD — create, edit, disable, delete room types (room type, price/night, capacity, total units, image, amenities).</td>
+</tr>
+<tr>
+<td>H-M05</td>
+<td>Bookings list with status filter and source filter (website vs walk-in).</td>
+</tr>
+<tr>
+<td>H-M06</td>
+<td>Create walk-in booking on behalf of a guest (room, date range, guest details).</td>
+</tr>
+<tr>
+<td>H-M07</td>
+<td>Confirm or cancel pending bookings.</td>
+</tr>
+<tr>
+<td>H-M08</td>
+<td>Reports — month-by-month revenue trend, source mix, revenue by room type.</td>
+</tr>
+</tbody></table>
+<h3>4.3 Admin oversight (hotels)</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>H-A01</td>
+<td>Hotels list with stats (rooms, bookings, status).</td>
+</tr>
+<tr>
+<td>H-A02</td>
+<td>Hotels CRUD including star/guest rating fields.</td>
+</tr>
+<tr>
+<td>H-A03</td>
+<td>Flat list of all rooms across all hotels with hotel filter.</td>
+</tr>
+<tr>
+<td>H-A04</td>
+<td>Flat list of all hotel bookings.</td>
+</tr>
+<tr>
+<td>H-A05</td>
+<td>Disable a hotel (hides from public site but preserves data).</td>
+</tr>
+<tr>
+<td>H-A06</td>
+<td>Reports — platform-wide hotel revenue &amp; bookings.</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>5. Module 2 — Water Activities</h2>
+<h3>5.1 Customer-facing requirements</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A-C01</td>
+<td>&quot;Companies&quot; listing — water-sports operators with city/category filters.</td>
+</tr>
+<tr>
+<td>A-C02</td>
+<td>Operator (company) landing page — header with brand, then activities grouped by city; option to filter highlighted activities by the user&#39;s search category.</td>
+</tr>
+<tr>
+<td>A-C03</td>
+<td>Activity detail — description, includes, difficulty, duration, slot options.</td>
+</tr>
+<tr>
+<td>A-C04</td>
+<td>Date + persons input shared across the cart.</td>
+</tr>
+<tr>
+<td>A-C05</td>
+<td>Multi-activity cart — add multiple slots from one operator; remove items; live total.</td>
+</tr>
+<tr>
+<td>A-C06</td>
+<td>Transactional checkout — all cart items booked in a single atomic call. If any single slot is unavailable, the entire cart rolls back.</td>
+</tr>
+<tr>
+<td>A-C07</td>
+<td>Booking confirmation page listing each booking code.</td>
+</tr>
+<tr>
+<td>A-C08</td>
+<td>&quot;My Bookings&quot; includes water-activity bookings, with cancel where allowed.</td>
+</tr>
+</tbody></table>
+<h3>5.2 Activity Operator portal</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A-O01</td>
+<td>Login (separate JWT realm).</td>
+</tr>
+<tr>
+<td>A-O02</td>
+<td>Dashboard — activity count, today&#39;s bookings, today&#39;s persons, upcoming bookings, monthly revenue.</td>
+</tr>
+<tr>
+<td>A-O03</td>
+<td>&quot;My Activities&quot; — list of all activities owned by the operator.</td>
+</tr>
+<tr>
+<td>A-O04</td>
+<td>Activity CRUD — create, edit, disable, delete activities (name, city, category, difficulty, duration, image, includes).</td>
+</tr>
+<tr>
+<td>A-O05</td>
+<td>Slot management within each activity — slot label, departure time, duration, price/person, max persons, image.</td>
+</tr>
+<tr>
+<td>A-O06</td>
+<td>Bookings list with activity / status / source filters.</td>
+</tr>
+<tr>
+<td>A-O07</td>
+<td>Walk-in booking — pick activity → pick slot → enter guest details.</td>
+</tr>
+<tr>
+<td>A-O08</td>
+<td>Confirm / cancel pending bookings.</td>
+</tr>
+</tbody></table>
+<h3>5.3 Admin oversight (activities)</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A-A01</td>
+<td>Activities list with operator + stats.</td>
+</tr>
+<tr>
+<td>A-A02</td>
+<td>Activities CRUD; optional assignment to an operator (unassigned activities are admin-managed).</td>
+</tr>
+<tr>
+<td>A-A03</td>
+<td>Flat list of all slots across all activities with activity filter.</td>
+</tr>
+<tr>
+<td>A-A04</td>
+<td>Flat list of all activity bookings.</td>
+</tr>
+<tr>
+<td>A-A05</td>
+<td>Operators CRUD — create, edit, disable, delete operator accounts.</td>
+</tr>
+<tr>
+<td>A-A06</td>
+<td>Reports — platform-wide revenue, top activities, source mix.</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>6. Module 3 — Bus (3rd-party API integration)</h2>
+<blockquote>
+<p><strong>Important constraint:</strong> This module&#39;s feature set is <strong>constrained by the capabilities of the selected third-party bus API provider</strong>. What this document promises is the <strong>integration of features the chosen provider exposes</strong> — not a wishlist of features the API may not support. The exact provider (RedBus, ITS Mobisoft, AbhiBus, etc.) is to be jointly selected at project kickoff.</p>
+</blockquote>
+<h3>6.1 Customer-facing requirements (subject to API)</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>B-C01</td>
+<td>Bus search page — origin city, destination city, journey date, optional return date.</td>
+</tr>
+<tr>
+<td>B-C02</td>
+<td>Results list with operator, bus type, departure / arrival times, duration, fare, available seats.</td>
+</tr>
+<tr>
+<td>B-C03</td>
+<td>Filters (subject to API data) — bus type, departure time window, operator, price range.</td>
+</tr>
+<tr>
+<td>B-C04</td>
+<td>Seat-selection page — interactive seat map from the API, lower/upper deck where applicable.</td>
+</tr>
+<tr>
+<td>B-C05</td>
+<td>Passenger details + boarding point selection.</td>
+</tr>
+<tr>
+<td>B-C06</td>
+<td>Payment via single integrated payment gateway.</td>
+</tr>
+<tr>
+<td>B-C07</td>
+<td>Ticket confirmation — PNR / booking code, e-ticket displayed and emailed.</td>
+</tr>
+<tr>
+<td>B-C08</td>
+<td>&quot;My Bookings&quot; — view bus tickets, with cancel (where the API supports it).</td>
+</tr>
+</tbody></table>
+<h3>6.2 Admin oversight (bus)</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>B-A01</td>
+<td>Bus bookings list — all bookings made through the platform with status, PNR, customer details.</td>
+</tr>
+<tr>
+<td>B-A02</td>
+<td>Reconcile booking status against the provider (manual refresh button).</td>
+</tr>
+<tr>
+<td>B-A03</td>
+<td>Basic reports — bookings count and revenue by month.</td>
+</tr>
+</tbody></table>
+<h3>6.3 Out of scope (bus module)</h3>
+<ul>
+<li>No bus operator panel.</li>
+<li>No internal fleet / route / schedule / seat-layout management.</li>
+<li>No support for offline / non-API operators.</li>
+<li>No multi-aggregator fallback or routing.</li>
+<li>Refunds, chargebacks, dispute resolution follow the <strong>provider&#39;s</strong> rules and timeline; COKALO does not warrant outcomes beyond what the API returns.</li>
+</ul>
+<hr>
+<h2>7. Common / Cross-Cutting Features</h2>
+<h3>7.1 Authentication</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AUTH-01</td>
+<td>Email + OTP signup (single flow). Optional password set during signup.</td>
+</tr>
+<tr>
+<td>AUTH-02</td>
+<td>Email + OTP login (default). Email + password login (optional fallback for users who set a password).</td>
+</tr>
+<tr>
+<td>AUTH-03</td>
+<td>6-digit OTP, 5-minute expiry, max 5 attempts per code, 60-second resend cooldown, max 3 requests per email per 10 minutes.</td>
+</tr>
+<tr>
+<td>AUTH-04</td>
+<td>OTP delivery via SMTP (PHPMailer).</td>
+</tr>
+<tr>
+<td>AUTH-05</td>
+<td>Separate JWT realms for users, admins, hotel managers, activity operators.</td>
+</tr>
+</tbody></table>
+<h3>7.2 Notifications</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>N-01</td>
+<td>OTP email (verification).</td>
+</tr>
+<tr>
+<td>N-02</td>
+<td>Booking confirmation email (per booking).</td>
+</tr>
+<tr>
+<td>N-03</td>
+<td>Booking cancellation email (when cancelled by user or operator/manager).</td>
+</tr>
+</tbody></table>
+<h3>7.3 Branding &amp; UI</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>UI-01</td>
+<td>Single brand identity — COKALO logo, purple/blue colour palette, Playfair + Inter typography.</td>
+</tr>
+<tr>
+<td>UI-02</td>
+<td>Responsive across desktop, tablet, mobile breakpoints.</td>
+</tr>
+<tr>
+<td>UI-03</td>
+<td>Tested on latest Chrome, Edge, Safari, Firefox.</td>
+</tr>
+</tbody></table>
+<h3>7.4 Commission &amp; GST module</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FIN-01</td>
+<td><strong>Per-vendor commission rate.</strong> Admin can configure a commission percentage per hotel and per water-sports operator (default fallback if not set). For bus bookings, a flat platform-level commission rate is configured.</td>
+</tr>
+<tr>
+<td>FIN-02</td>
+<td><strong>Booking split.</strong> At booking creation, the system records: gross amount, commission (%) and amount, GST (%) and amount, vendor net. All four are stored on the booking row so reports always reconcile.</td>
+</tr>
+<tr>
+<td>FIN-03</td>
+<td><strong>GST rate.</strong> Admin can configure a single GST rate (or per-category rate — Hotels, Activities, Bus). GST is calculated and shown on every customer invoice and operator/manager statement. Default split (CGST+SGST vs IGST) follows a configurable rule based on the billing address.</td>
+</tr>
+<tr>
+<td>FIN-04</td>
+<td><strong>Customer invoice.</strong> Booking confirmation email and downloadable PDF invoice show: line item, base amount, GST breakdown (CGST/SGST/IGST), total. Includes the configured GSTIN of the platform.</td>
+</tr>
+<tr>
+<td>FIN-05</td>
+<td><strong>Vendor statement.</strong> Each hotel manager / activity operator can view a statement of their bookings — gross, commission deducted, GST collected on their behalf, net payable. Month and date-range filters.</td>
+</tr>
+<tr>
+<td>FIN-06</td>
+<td><strong>Admin reconciliation.</strong> Admin sees a roll-up — total gross, total commission earned, total GST collected, total net payable to each vendor — for a chosen period. Export to CSV.</td>
+</tr>
+<tr>
+<td>FIN-07</td>
+<td><strong>Bus commission.</strong> Where the third-party bus API exposes the commission/markup, the platform records the API-reported figure. Where the API doesn&#39;t expose it, the platform&#39;s configured flat-rate applies.</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>Out of scope (FIN):</strong> automated payouts to vendors (Razorpay X / banking integration), TDS withholding, e-invoicing on GSTN, ITC reconciliation, GST return filing (GSTR-1 / GSTR-3B). The platform produces reports that a CA / accountant can use — it does not file returns. (See Section 2.2 #14.)</p>
+</blockquote>
+<h3>7.5 Dashboards — scope of &quot;advanced&quot;</h3>
+<p>What &quot;advanced dashboards&quot; includes (per role):</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Widgets included</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Customer</strong></td>
+<td>&quot;My bookings&quot; with status pills (upcoming / completed / cancelled), grouped by module (hotels / activities / bus), cancel button where allowed.</td>
+</tr>
+<tr>
+<td><strong>Hotel manager</strong></td>
+<td>Today&#39;s check-ins / check-outs / current guests / month bookings / month revenue. Upcoming bookings table. Revenue trend (last 6 months). Source mix (website vs walk-in). Revenue by room type.</td>
+</tr>
+<tr>
+<td><strong>Activity operator</strong></td>
+<td>Activity count, today&#39;s bookings, today&#39;s persons, upcoming total, monthly revenue, monthly bookings. Upcoming bookings table (across all activities).</td>
+</tr>
+<tr>
+<td><strong>Admin</strong></td>
+<td>Platform-wide gross / commission / net / GST collected for current period. Top 5 hotels and top 5 activities by revenue. Monthly trend (6 months). Source mix. Operator-wise commission roll-up.</td>
+</tr>
+</tbody></table>
+<p>What &quot;advanced&quot; does <strong>not</strong> mean (out of scope, billed separately if needed later):</p>
+<ul>
+<li>Custom report builders and ad-hoc query interfaces</li>
+<li>Drill-down BI / OLAP / pivot tables</li>
+<li>Cohort analysis, funnel analytics, retention curves</li>
+<li>Predictive / ML forecasting</li>
+<li>Real-time live-streaming dashboards</li>
+<li>Native exports to Power BI / Tableau / Looker / Google Data Studio</li>
+<li>Per-tenant white-labelled dashboards</li>
+<li>Vendor-side mobile app for the dashboard</li>
+</ul>
+<hr>
+<h2>8. Non-Functional Requirements</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>NFR-01</td>
+<td><strong>Performance</strong> — public list pages render under 2 seconds on standard broadband and a database with ≤ 10,000 records per table.</td>
+</tr>
+<tr>
+<td>NFR-02</td>
+<td><strong>Concurrency</strong> — atomic multi-booking checkout must be safe against parallel cart submissions (row-level locking inside DB transaction).</td>
+</tr>
+<tr>
+<td>NFR-03</td>
+<td><strong>Security</strong> — all admin / manager / operator endpoints behind JWT auth; passwords stored as bcrypt hashes; OTPs single-use with expiry; CORS allowlist restricted to known portal origins; SQL via parameterised PDO.</td>
+</tr>
+<tr>
+<td>NFR-04</td>
+<td><strong>Logging</strong> — server errors logged to PHP error log; SMTP failures surfaced via API errors.</td>
+</tr>
+<tr>
+<td>NFR-05</td>
+<td><strong>Rate limiting</strong> — OTP requests rate-limited per email.</td>
+</tr>
+<tr>
+<td>NFR-06</td>
+<td><strong>Browser support</strong> — last 2 versions of Chrome, Edge, Safari, Firefox.</td>
+</tr>
+<tr>
+<td>NFR-07</td>
+<td><strong>Backup</strong> — client is responsible for periodic DB backups post-handover.</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>9. Technology Stack</h2>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Technology</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Customer / Admin / Manager / Operator frontends</td>
+<td>Next.js 14 (React), JavaScript, CSS modules</td>
+</tr>
+<tr>
+<td>API / Backend</td>
+<td>PHP 8.x, PDO + MySQL</td>
+</tr>
+<tr>
+<td>Mail</td>
+<td>PHPMailer 6.x over SMTP</td>
+</tr>
+<tr>
+<td>Authentication</td>
+<td>Custom HS256 JWT</td>
+</tr>
+<tr>
+<td>Database</td>
+<td>MySQL 8.x / MariaDB 10.x</td>
+</tr>
+<tr>
+<td>Hosting target</td>
+<td>XAMPP for dev; cPanel-based shared host or Linux VPS for production</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>10. Deliverables</h2>
+<p>At the end of the engagement, Codersdek will deliver:</p>
+<ol>
+<li><strong>Source code</strong> for all four frontends and the PHP backend, via a private Git repository (or zipped on request).</li>
+<li><strong>Database schema</strong> as a single SQL file plus migration scripts.</li>
+<li><strong>One-page deployment guide</strong> covering server requirements, env-file values, and seed steps.</li>
+<li><strong>Admin / manager / operator credentials</strong> for the production deployment.</li>
+<li><strong>30-day post-launch bug-fix support</strong> — issues directly attributable to the delivered scope.</li>
+</ol>
+<hr>
+<h2>11. Project Timeline &amp; Milestones</h2>
+<p><strong>Duration:</strong> ~12 weeks from project kickoff — <strong>10 May 2026 → 31 July 2026</strong>.
+<strong>Working assumption:</strong> kickoff = day 0; week = 7 calendar days.</p>
+<table>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>Week</th>
+<th>Target date</th>
+<th>Deliverables</th>
+<th>Payment release</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>M0 — Kickoff</strong></td>
+<td>0</td>
+<td>10 May 2026</td>
+<td>Signed proposal, requirements walkthrough, branding assets received, third-party bus provider selected.</td>
+<td>INR 50,000 advance</td>
+</tr>
+<tr>
+<td><strong>M1 — 25%</strong></td>
+<td>3</td>
+<td>31 May 2026</td>
+<td>Hotels module customer + manager portals live in staging. Auth + OTP working end-to-end. Brand + design system applied.</td>
+<td>INR 50,000</td>
+</tr>
+<tr>
+<td><strong>M2 — 50%</strong></td>
+<td>6</td>
+<td>21 Jun 2026</td>
+<td>Water Activities module live in staging — customer + operator portals + admin oversight. Multi-activity cart + transactional checkout working.</td>
+<td>INR 50,000</td>
+</tr>
+<tr>
+<td><strong>M3 — 75%</strong></td>
+<td>9</td>
+<td>12 Jul 2026</td>
+<td>Bus module integrated with chosen 3rd-party API — customer search, seat selection, payment, confirmation. Admin reconcile screen.</td>
+<td>INR 50,000</td>
+</tr>
+<tr>
+<td><strong>M4 — 100%</strong></td>
+<td>12</td>
+<td>31 Jul 2026</td>
+<td>Production deployment, smoke-tested. Bug-fix sprint completed. Handover documents delivered. Project signed off.</td>
+<td>INR 50,000</td>
+</tr>
+</tbody></table>
+<p><strong>Schedule risk note:</strong> any delay caused by pending client inputs (logo, copy, content, API credentials, sandbox approvals, payment-gateway KYC, etc.) shifts the timeline day-for-day. Approval delays beyond 5 working days on any milestone are treated as a client-side hold.</p>
+<hr>
+<h2>12. Acceptance Criteria</h2>
+<p>Each milestone is deemed accepted when:</p>
+<ol>
+<li>The features listed against that milestone are demoable on the staging environment.</li>
+<li>The client (or nominee) signs off within <strong>5 working days</strong> of the demo email. Silence beyond 5 working days will be treated as deemed acceptance for the purposes of payment release.</li>
+<li>Show-stopper bugs — defined as security flaws or features that simply do not work — are excluded from deemed acceptance and must be fixed before the milestone closes.</li>
+</ol>
+<p>Final acceptance at M4 requires:</p>
+<ul>
+<li>Successful production deployment with all flows demonstrably working against the live database.</li>
+<li>Admin / manager / operator credentials handed over.</li>
+<li>No open show-stopper bugs.</li>
+</ul>
+<hr>
+<h2>13. Assumptions</h2>
+<ol>
+<li>Client provides all hotel/activity content (descriptions, images, amenities) by the start of M1.</li>
+<li>Client provides bus-API provider credentials and any required KYC approvals by the start of M3. Without these, the bus module cannot be integrated and the M3 milestone slips on a day-for-day basis.</li>
+<li>Client provides payment-gateway test + live credentials by the start of M3.</li>
+<li>Client provides domain, hosting account, SSL certificate, and DNS access by the start of M4.</li>
+<li>The platform runs as a single-tenant codebase. Branding is single-brand (COKALO).</li>
+<li>Communication will be via a single point of contact on the client side; ad-hoc requests from third parties will be redirected through that contact.</li>
+<li>Scope changes after sign-off (i.e. anything not explicitly listed in Section 4–Section 7) are change-requests and are billed separately at Codersdek&#39;s hourly rate.</li>
+</ol>
+<hr>
+<h2>14. Change Requests</h2>
+<ul>
+<li>Requests for new features beyond Section 4–Section 7 will be scoped, estimated, and quoted as a written change-request before any work begins.</li>
+<li>Approved change-requests adjust the timeline and may extend the final delivery date.</li>
+<li>Cosmetic / minor edits (copy tweaks, small CSS adjustments) during active development are absorbed at Codersdek&#39;s discretion and don&#39;t require a formal change-request.</li>
+</ul>
+<hr>
+<h2>15. Commercial Proposal</h2>
+<h3>15.1 Quote</h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Amount (INR)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Development of COKALO platform — 3 modules (Hotels + Water Activities + Bus 3rd-party integration) including admin panel, two manager portals, customer web app, REST API, database, deployment, 30-day post-launch bug fixes</td>
+<td><strong>INR 2,50,000</strong></td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>INR 2,50,000</strong></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><em>All figures are in Indian Rupees. GST extra at applicable rate if the client requires a GST invoice.</em></p>
+</blockquote>
+<h3>15.2 What is <strong>not</strong> included in the quote</h3>
+<ul>
+<li>Bus aggregator API subscription / per-booking commissions</li>
+<li>Payment-gateway transaction fees</li>
+<li>SMS / WhatsApp / transactional-email fees</li>
+<li>Hosting, domain, SSL</li>
+<li>Map / geocoding API usage</li>
+<li>Content writing, photography, marketing</li>
+<li>Any third-party plugin / library license fees beyond open-source dependencies already in use</li>
+</ul>
+<p>The client pays these directly to the respective service providers. Codersdek will guide setup but does not absorb usage costs.</p>
+<h3>15.3 Payment Schedule</h3>
+<p>Five equal instalments of <strong>INR 50,000 each</strong>, releasing against milestone acceptance per Section 11.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Trigger</th>
+<th>Amount</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Signed proposal — kickoff advance</td>
+<td>INR 50,000</td>
+</tr>
+<tr>
+<td>2</td>
+<td>M1 acceptance (25%)</td>
+<td>INR 50,000</td>
+</tr>
+<tr>
+<td>3</td>
+<td>M2 acceptance (50%)</td>
+<td>INR 50,000</td>
+</tr>
+<tr>
+<td>4</td>
+<td>M3 acceptance (75%)</td>
+<td>INR 50,000</td>
+</tr>
+<tr>
+<td>5</td>
+<td>M4 acceptance — final go-live (100%)</td>
+<td>INR 50,000</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Total</strong></td>
+<td><strong>INR 2,50,000</strong></td>
+</tr>
+</tbody></table>
+<h3>15.4 Payment Terms</h3>
+<ol>
+<li>Each milestone invoice is payable within <strong>5 working days</strong> of acceptance.</li>
+<li>Late payment beyond 10 working days pauses further development; the timeline shifts day-for-day until payment is received.</li>
+<li>Payment via NEFT / IMPS / UPI to Codersdek&#39;s designated bank account (details on invoice).</li>
+<li>The advance payment is non-refundable once kickoff has occurred (i.e. requirements walkthrough completed and assets transferred).</li>
+<li>Source code and credentials are released to the client <strong>only after the final invoice is settled.</strong></li>
+<li>Any third-party service costs incurred for testing during development (sandbox SMTP, sandbox payment gateway, etc.) are billed at actuals against receipts, separate from the project fee.</li>
+</ol>
+<h3>15.5 Post-launch Support</h3>
+<ul>
+<li><strong>30 days</strong> of bug-fix support included from the go-live date. &quot;Bug&quot; means a feature listed in this SRS that does not work as specified.</li>
+<li><strong>All other post-delivery work is billed separately.</strong> This includes — without limitation — new features, scope additions, third-party API changes (RedBus / payment gateway / SMTP / etc. publishing breaking changes), server administration, performance tuning, security patching, periodic enhancements, onboarding new hotels / operators that require any custom API integration, version upgrades of Node / PHP / MySQL / Next.js, plugin or library updates, content moderation, customer support, marketing collateral, and any feature requests originating from individual hotels / operators or end users.</li>
+<li>These can be engaged either as <strong>one-off change-requests</strong> (quoted on demand) or under a <strong>separate Annual Maintenance Contract (AMC)</strong> with monthly retainer hours. AMC terms are outside the scope of this proposal and are negotiated as a separate agreement at the end of the 30-day bug-fix window.</li>
+</ul>
+<h3>15.6 Validity</h3>
+<p>This proposal is valid for <strong>15 days</strong> from the document date.</p>
+<hr>
+<h2>16. Sign-off</h2>
+<p>The signatures below indicate agreement to:</p>
+<ul>
+<li>the scope defined in Section 2 through Section 7;</li>
+<li>the exclusions listed in Section 2.2 and Section 6.3;</li>
+<li>the timeline and acceptance process in Section 11–Section 12;</li>
+<li>the commercial terms in Section 15.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>For the Client</th>
+<th>For Codersdek</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Name: ________________________</td>
+<td>Name: ________________________</td>
+</tr>
+<tr>
+<td>Title: ________________________</td>
+<td>Title: ________________________</td>
+</tr>
+<tr>
+<td>Signature: ____________________</td>
+<td>Signature: ____________________</td>
+</tr>
+<tr>
+<td>Date: _________________________</td>
+<td>Date: _________________________</td>
+</tr>
+</tbody></table>
+<hr>
+<h3>Appendix A — Glossary</h3>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Operator</strong></td>
+<td>A water-sports company that owns and runs one or more activities on COKALO.</td>
+</tr>
+<tr>
+<td><strong>Manager</strong></td>
+<td>A hotel staff account with rights to one specific hotel.</td>
+</tr>
+<tr>
+<td><strong>Admin</strong></td>
+<td>A COKALO platform staff account with full oversight.</td>
+</tr>
+<tr>
+<td><strong>Slot</strong></td>
+<td>A specific time-of-day departure for a water activity (e.g. &quot;Morning Trip @ 9 AM&quot;).</td>
+</tr>
+<tr>
+<td><strong>Walk-in booking</strong></td>
+<td>A booking entered into the system by a manager/operator on behalf of a guest who isn&#39;t using the website.</td>
+</tr>
+<tr>
+<td><strong>Property type</strong></td>
+<td>Categorisation of a hotel — Hotel, Resort, Service Apartment, Villa, Guest House, etc.</td>
+</tr>
+<tr>
+<td><strong>PNR</strong></td>
+<td>Passenger Name Record — the bus aggregator&#39;s unique booking reference.</td>
+</tr>
+</tbody></table>
+<h3>Appendix B — Document Revision History</h3>
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Date</th>
+<th>Author</th>
+<th>Changes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.0</td>
+<td>2026-05-21</td>
+<td>Codersdek</td>
+<td>Initial release for client review and sign-off.</td>
+</tr>
+<tr>
+<td>1.1</td>
+<td>2026-05-24</td>
+<td>Codersdek</td>
+<td>Section 11 milestones anchored to fixed dates (M0 = 10 May 2026, M4 = 31 Jul 2026).</td>
+</tr>
+</tbody></table>
+
+</section>
+
+<div class="footer">COKALO · SRS &amp; Proposal · 2026-05-24</div>
+
+</body>
+</html>

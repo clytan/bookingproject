@@ -1,0 +1,118 @@
+.table-card {
+  background: white;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.table-header h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.table-header p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.view-all {
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  background: var(--primary-light);
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+
+.view-all:hover {
+  background: #e0e7ff;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #fafbfc;
+}
+
+th {
+  text-align: left;
+  padding: 14px 24px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+td {
+  padding: 16px 24px;
+  font-size: 14px;
+  color: var(--text-dark);
+  border-bottom: 1px solid var(--border);
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background: #fafbfc;
+}
+
+td.mono {
+  font-family: 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+td.strong { font-weight: 600; }
+td.muted  { color: var(--text-muted); font-size: 13px; }
+
+.status-pill {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.status-pill.confirmed { background: #d1fae5; color: #065f46; }
+.status-pill.pending   { background: #fef3c7; color: #92400e; }
+.status-pill.cancelled { background: #fee2e2; color: #991b1b; }
+
+.row-action {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+}
+
+.row-action:hover {
+  background: var(--bg);
+  color: var(--text-dark);
+}

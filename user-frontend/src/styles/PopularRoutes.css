@@ -1,0 +1,116 @@
+.popular-routes {
+  max-width: 1280px;
+  margin: -80px auto 0;
+  padding: 0 24px 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 48px;
+  color: white;
+}
+
+.section-header h2 {
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.section-header p {
+  font-size: 16px;
+  opacity: 0.85;
+}
+
+.popular-routes + section .section-header,
+.popular-routes ~ section .section-header {
+  color: var(--text-dark);
+}
+
+.routes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.route-card {
+  background: white;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid var(--border);
+}
+
+.route-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+.route-cities {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.city {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.arrow {
+  color: var(--primary);
+  font-size: 14px;
+}
+
+.route-meta {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px dashed var(--border);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.duration {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.route-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price-label {
+  display: block;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.price {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.book-btn {
+  padding: 10px 20px;
+  background: var(--secondary);
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.book-btn:hover {
+  background: #142847;
+}

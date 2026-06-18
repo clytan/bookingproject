@@ -1,0 +1,61 @@
+.m-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 32px;
+  background: white;
+  border-bottom: 1px solid var(--border);
+  gap: 16px;
+}
+
+.m-header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.m-header p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.m-hotel-chip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 14px 8px 8px;
+  background: var(--bg);
+  border-radius: 999px;
+}
+
+.m-chip-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  background-size: cover;
+  background-position: center;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.m-chip-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.m-chip-hotel {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.m-chip-name {
+  font-size: 11px;
+  color: var(--text-muted);
+}
