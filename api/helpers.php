@@ -4,19 +4,30 @@
 // =============================================================
 
 function cors_headers() {
-    // Allow Next.js dev origins + same-origin in production
+    // Static allowlist: localhost dev + production domains.
     $allowed = [
-        'http://localhost:3000',
-        'http://localhost:3001',
-        'http://localhost:3002',
-        'http://localhost:3003',
-        'http://127.0.0.1:3000',
-        'http://127.0.0.1:3001',
-        'http://127.0.0.1:3002',
-        'http://127.0.0.1:3003',
+        'http://localhost:3000',  'http://localhost:3001',
+        'http://localhost:3002',  'http://localhost:3003',
+        'http://127.0.0.1:3000',  'http://127.0.0.1:3001',
+        'http://127.0.0.1:3002',  'http://127.0.0.1:3003',
+        'https://codersdek.com',  'https://www.codersdek.com',
     ];
+    // Extra origins from env: comma-separated list, e.g.
+    //   CORS_ORIGINS=https://myapp.com,https://staging.myapp.com
+    $env = getenv('CORS_ORIGINS');
+    if ($env) {
+        foreach (explode(',', $env) as $o) {
+            $o = trim($o);
+            if ($o !== '') $allowed[] = $o;
+        }
+    }
+
     $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
-    if (in_array($origin, $allowed, true)) {
+    $ok = in_array($origin, $allowed, true)
+        // Any vercel.app subdomain (preview + production deployments)
+        || preg_match('#^https://[a-z0-9-]+\.vercel\.app$#i', $origin);
+
+    if ($ok && $origin) {
         header("Access-Control-Allow-Origin: $origin");
         header('Vary: Origin');
         header('Access-Control-Allow-Credentials: true');
