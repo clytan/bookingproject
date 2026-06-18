@@ -5,18 +5,14 @@ api/config/jwt.local.php
 .env.local
 .env.*.local
 
-# Node / Next.js (per-app .gitignores cover these too, but belt + suspenders)
+# Node
 node_modules/
 **/node_modules/
 .next/
 **/.next/
-out/
-**/out/
 
 # OS / editor
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
-
-# Frontend build outputs
