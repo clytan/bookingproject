@@ -3,8 +3,11 @@
 // Minimal HS256 JWT helper (no external deps, no composer needed)
 // =============================================================
 
-define('JWT_SECRET', 'change-this-to-a-long-random-string-in-production');
-define('JWT_EXPIRY', 60 * 60 * 8); // 8 hours
+if (file_exists(__DIR__ . '/jwt.local.php')) {
+    require_once __DIR__ . '/jwt.local.php';
+}
+if (!defined('JWT_SECRET')) define('JWT_SECRET', getenv('JWT_SECRET') ?: 'change-this-to-a-long-random-string-in-production');
+if (!defined('JWT_EXPIRY')) define('JWT_EXPIRY', 60 * 60 * 8); // 8 hours
 
 function base64url_encode($data) {
     return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');

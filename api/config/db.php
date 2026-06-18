@@ -1,14 +1,20 @@
 <?php
 // =============================================================
 // Database connection (PDO)
-// Edit these for local XAMPP or GoDaddy production.
+// Credentials are loaded from db.local.php (gitignored).
+// Local dev: copy db.local.example.php to db.local.php, edit values.
+// Production: upload db.local.php to api/config/ via FTP/cPanel.
 // =============================================================
 
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'busgo_db');
-define('DB_USER', 'root');     // XAMPP default
-define('DB_PASS', '');         // XAMPP default (empty)
-define('DB_CHARSET', 'utf8mb4');
+if (file_exists(__DIR__ . '/db.local.php')) {
+    require_once __DIR__ . '/db.local.php';
+} else {
+    if (!defined('DB_HOST')) define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+    if (!defined('DB_NAME')) define('DB_NAME', getenv('DB_NAME') ?: 'busgo_db');
+    if (!defined('DB_USER')) define('DB_USER', getenv('DB_USER') ?: 'root');
+    if (!defined('DB_PASS')) define('DB_PASS', getenv('DB_PASS') ?: '');
+}
+if (!defined('DB_CHARSET')) define('DB_CHARSET', 'utf8mb4');
 
 function get_db() {
     static $pdo = null;

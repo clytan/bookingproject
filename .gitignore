@@ -1,0 +1,20 @@
+# Secrets — never commit
+api/config/db.local.php
+api/config/jwt.local.php
+.env
+.env.local
+.env.*.local
+
+# Node / Next.js (per-app .gitignores cover these too, but belt + suspenders)
+node_modules/
+**/node_modules/
+.next/
+**/.next/
+out/
+**/out/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
